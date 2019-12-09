@@ -7,23 +7,37 @@
 #' @example map_safe(iris$Sepal.Length, log)
 
 map_safe <- function(.x, f, ...) {
-
+  #.x: vector of paths to csvs
+  #f: function that's being applied to the dataset
+  #... arguments
   if (length(.x) == 1) {
-    # if there is one row in .x: get and return the row number
-    tryCatch(
-      # if this does not return an error, return TRUE:
-      error = function(e) {
-        FALSE
-      }, {
-        walk(.x, f, ...)
+    #if there is one row in .x: get and return the row number
+    a <- tryCatch(
+      {
+        #This is the try part
+        map(.x, f, ...)
         TRUE
+      },
+      error = function(e) {
+        message("Something went wrong")
+        message("Here's the original error message")
+        message(e)
+        return(FALSE)
+      },
+      warning=function(w) {
+        message("Here's the original warning message:")
+        message(w)
+        # Choose a return value in case of warning
+        return(TRUE)
       }
     )
+    return(a)
   }
   else {
-    # else, slice and run map_safe on each half
-    a <- split(.x, c(1, 2))$`1` #first half of .x
-    b <- split(.x, c(1, 2))$`2` #second half of .x
+    #else, slice and run map_safe on each half
+
+    a <- .x[1:floor(length(.x)/2)] #first half of .x
+    b <- .x[ceiling(length(.x)/2):length(.x)] #second half of .x
     return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
   }
 }
