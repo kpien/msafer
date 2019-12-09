@@ -1,0 +1,107 @@
+---
+title: "Untitled"
+author: "Kelly Pien"
+date: "11/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(purrr)
+library(dplyr)
+```
+
+```{r}
+#always returns logical vector
+#another function
+#if map_safe returns all TRUE, else different behaviors: only return good results
+
+map_safe <- function(.x, f, ...) {
+  #.x: vector of paths to csvs
+  #f: function that's being applied to the dataset
+  #... arguments
+  if (length(.x) == 1) {
+    #if there is one row in .x: get and return the row number
+    tryCatch(
+      #if this does not return an error, return TRUE: 
+      error = function(e) {
+        FALSE
+      }, {
+        walk(.x, f, ...)
+        TRUE
+      }
+    )
+  }
+  else {
+      #else, slice and run map_safe on each half
+    
+      a <- split(.x, c(1, 2))$`1` #first half of .x
+      b <- split(.x, c(1, 2))$`2` #second half of .x
+      return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
+  }
+}
+```
+
+```{r}
+map(Workbook1$x2, sqrt)
+```
+
+```{r}
+map_safe(Workbook1$x2, sqrt)
+```
+
+```{r}
+map_safe(Workbook1$X, sqrt)
+```
+
+```{r}
+  # if (ncol(x) < ncol(.data)) {
+  #   warning("All columns selected!")
+  # }
+  # 
+  # if (ncol(x) < 1) {
+  #   stop("No columns selected.")
+  # }
+  # 
+  # message(paste("Computing on", ncol(x), "columns..."))  
+  # map_int(x, n_distinct)
+```
+
+```{r}
+Workbook1 <- read.csv("Workbook1.csv")
+```
+
+```{r}
+map(Workbook1, sqrt)
+```
+
+```{r}
+Workbook2 <- Workbook1
+Workbook2$X <- NULL
+map(Workbook2, sqrt)
+```
+
+```{r}
+map_safe(Workbook1, sqrt)
+```
+
+```{r}
+map_safe(Workbook2, sqrt)
+```
+
+
+```{r}
+file_good <- function(.data, ...){
+  # Using `dplyr::filter()` to get the rows that matches the user's need and store them into row.
+  row <- .data %>%
+    filter(...)%>%
+    # Count the number of rows that matches the user's need.
+    nrow()
+  # Return TRUE if the rows that matches the need is greater than 0, else return FALSE
+  isTRUE(row > 0)
+}
+```
+
