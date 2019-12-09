@@ -1,0 +1,18 @@
+Package: msafer
+Type: Package
+Title: Check If You Can Use Map
+Version: 0.1.0
+Author: as.person(c(
+    "Lily Jin <ljin54@smith.edu> [aut, cre]",
+    "Carol Liu <cliu13@smith.edu> [aut, cre]",
+    "Kelly Pien <kpien@smith.edu> [aut, cre]"
+  ))
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports:
+    purrr,
+    dplyr
+RoxygenNote: 6.1.1
