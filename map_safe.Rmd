@@ -1,6 +1,6 @@
 ---
-title: "Untitled"
-author: "Kelly Pien"
+title: "map_safe()"
+author: "Kelly Pien, Lily Jin, Carol Liu"
 date: "11/29/2019"
 output: html_document
 ---
