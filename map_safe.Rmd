@@ -49,17 +49,9 @@ map_safe <- function(.x, f, ...) {
     }
   else {
     # else, split in halves and run map_safe on each half
+    a <- split(.x, c(1, 2))$`1` #first half of .x
+    b <- split(.x, c(1, 2))$`2` #second half of .x
     
-    #if type of .x is vector, use length to split in half
-    if (is.vector(.x) == TRUE) {
-      a <- .x[1:floor(length(.x)/2)] #first half of .x
-      b <- .x[ceiling(length(.x)/2):length(.x)] #second half of .x
-    }
-    #otherwise if type of .x is dataframe, use nrow to split in half
-    else if (is.data.frame(.x) == TRUE) {
-      a <- .x[1:floor(nrow(.x)/2), ] #first half of .x
-      b <- .x[ceiling(nrow(.x)/2):nrow(.x), ] #second half of .x
-    }
     return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
   }
 }
