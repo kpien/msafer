@@ -7,6 +7,7 @@ Author: as.person(c(
     "Carol Liu <cliu13@smith.edu> [aut, cre]",
     "Kelly Pien <kpien@smith.edu> [aut, cre]"
   ))
+Maintainer: Kelly Pien <kpien@smith.edu>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: CC0

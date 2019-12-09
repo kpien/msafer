@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(purrr)
 library(dplyr)
+library(readr)
 ```
 
 ```{r}
@@ -20,30 +21,91 @@ library(dplyr)
 #if map_safe returns all TRUE, else different behaviors: only return good results
 
 map_safe <- function(.x, f, ...) {
-  #.x: vector of paths to csvs
-  #f: function that's being applied to the dataset
-  #... arguments
+  # .x: vector of paths to csvs
+  # f: function that's being applied to the dataset
+  # ... arguments
   if (length(.x) == 1) {
     #if there is one row in .x: get and return the row number
-    tryCatch(
-      #if this does not return an error, return TRUE: 
-      error = function(e) {
-        FALSE
-      }, {
-        walk(.x, f, ...)
+    a <- tryCatch(
+      {
+        #This is the try part
+        map(.x, f, ...)
         TRUE
+      },
+      error = function(e) {
+        message("Something went wrong")
+        message("Here's the original error message")
+        message(e)
+        return(FALSE)
+      },
+      warning=function(w) {
+        message("Here's the original warning message:")
+        message(w)
+            # Choose a return value in case of warning
+        return(TRUE)
       }
-    )
-  }
+      )
+    return(a)
+    }
   else {
-      #else, slice and run map_safe on each half
+    # else, split in halves and run map_safe on each half
     
-      a <- split(.x, c(1, 2))$`1` #first half of .x
-      b <- split(.x, c(1, 2))$`2` #second half of .x
-      return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
+    #if type of .x is vector, use length to split in half
+    if (is.vector(.x) == TRUE) {
+      a <- .x[1:floor(length(.x)/2)] #first half of .x
+      b <- .x[ceiling(length(.x)/2):length(.x)] #second half of .x
+    }
+    #otherwise if type of .x is dataframe, use nrow to split in half
+    else if (is.data.frame(.x) == TRUE) {
+      a <- .x[1:floor(nrow(.x)/2), ] #first half of .x
+      b <- .x[ceiling(nrow(.x)/2):nrow(.x), ] #second half of .x
+    }
+    return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
   }
 }
 ```
+
+```{r}
+is.data.frame(starwars$height)
+```
+
+```{r}
+is.vector(starwars$height)
+```
+
+```{r}
+setwd("~/Desktop")
+mydir = "file_for_carol"
+file_list = list.files(path=mydir, pattern="*.csv", full.names=TRUE)
+file_list
+myfiles = lapply(file_list,read_csv)
+```
+
+```{r}
+map_safe(myfiles[[1]], read_csv)
+```
+
+```{r}
+map_safe(starwars$height, log)
+```
+
+```{r}
+length(starwars$height)
+```
+
+```{r}
+nrow(starwars)
+```
+
+```{r}
+map(Workbook2, log)
+```
+
+
+```{r}
+map_safe(Workbook2, log)
+```
+
 
 ```{r}
 map(Workbook1$x2, sqrt)
