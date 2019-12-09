@@ -15,7 +15,7 @@ map_safe <- function(.x, f, ...) {
     a <- tryCatch(
       {
         #This is the try part
-        map(.x, f, ...)
+        purrr::map(.x, f, ...)
         TRUE
       },
       error = function(e) {
