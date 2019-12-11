@@ -1,4 +1,4 @@
-# map_safe
+# msafer
 By Lily Jin, Carol Liu, Kelly Pien
 
 msafer is a package designed to help user free themselves from manually check the location of error when using the function `Map()`. When there's something wrong with`map()`, it only returns the error, but where this error occurs are not provided. msafer takes your vector, function and requirements, and spit out `TURE` or `FALSE` based on whether an error occurs when running the function over the vector. msafer will return a list of logical returns where it will be easy to identify the place of the error. 
