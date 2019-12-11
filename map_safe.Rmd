@@ -49,12 +49,20 @@ map_safe <- function(.x, f, ...) {
     }
   else {
     # else, split in halves and run map_safe on each half
-    a <- split(.x, c(1, 2))$`1` #first half of .x
-    b <- split(.x, c(1, 2))$`2` #second half of .x
-    
+    a <- .x[1] # Take the first element in the vector
+    b <- .x[2:length(.x)] # the remaining elements went through the recursion again
     return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
   }
 }
+```
+
+```{r}
+a <- c(starwars,mtcars)
+```
+
+
+```{r, warning=FALSE}
+map_safe(d1$y2, sqrt)
 ```
 
 ```{r}
@@ -74,15 +82,21 @@ myfiles = lapply(file_list,read_csv)
 ```
 
 ```{r}
-map_safe(myfiles[[1]], read_csv)
+map(myfiles, select, pO2)
 ```
 
-```{r}
+
+```{r, warning=FALSE}
+map_safe(myfiles, select, pO2)
+```
+
+```{r, warning=FALSE}
 map_safe(starwars$height, log)
 ```
+View(starwars)
 
-```{r}
-length(starwars$height)
+```{r, error=FALSE}
+map_safe(starwars$name, log)
 ```
 
 ```{r}
@@ -109,19 +123,6 @@ map_safe(Workbook1$x2, sqrt)
 
 ```{r}
 map_safe(Workbook1$X, sqrt)
-```
-
-```{r}
-  # if (ncol(x) < ncol(.data)) {
-  #   warning("All columns selected!")
-  # }
-  # 
-  # if (ncol(x) < 1) {
-  #   stop("No columns selected.")
-  # }
-  # 
-  # message(paste("Computing on", ncol(x), "columns..."))  
-  # map_int(x, n_distinct)
 ```
 
 ```{r}
