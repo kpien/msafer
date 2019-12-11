@@ -40,6 +40,12 @@ map_safe(starwars$names, log)
 [67] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [78] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
+sample_a <- sample_n(starwars, 34)
+sample_b <- sample_n(mtcars, 1:20)
+a <- list(starwars, sample_a, sample_b)
+map_safe(a, select, height)
+[1]  TRUE  TRUE FALSE
+
 # a list of 11 dataframes, with myfiles[[1]], myfiles[[2]], myfiles[[4]] being empty dataframes
 map_safe(myfiles, select, pO2)
 [1] FALSE FALSE TRUE FALSE TRUE  TRUE  TRUE  TRUE   TRUE  TRUE  TRUE
@@ -49,6 +55,7 @@ map_safe(myfiles, select, pO2)
 
 map_safe(myfiles, file_good, height==0)
 [1] TRUE TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+
 
 
 ```
