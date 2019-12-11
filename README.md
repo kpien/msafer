@@ -38,10 +38,9 @@ map_safe(starwars$names, log)
 [56] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [67] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [78] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-
-
 ```
-
+## Getting Help
+This is a very brief explanation of the msafer package, for more instruction please visit the Vignette for this package. 
 
 
 
