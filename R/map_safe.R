@@ -35,9 +35,8 @@ map_safe <- function(.x, f, ...) {
   }
   else {
     #else, slice and run map_safe on each half
-
-    a <- .x[1:floor(length(.x)/2)] #first half of .x
-    b <- .x[ceiling(length(.x)/2):length(.x)] #second half of .x
+    a <- .x[1] # Take the first element in the vector
+    b <- .x[2:length(.x)] # the remaining elements went through the recursion again
     return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
   }
 }

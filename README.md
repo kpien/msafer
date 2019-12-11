@@ -42,6 +42,9 @@ map_safe(starwars$names, log)
 [67] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [78] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
+file_good(starwars, height == 172)
+[1] TRUE
+
 sample_a <- sample_n(starwars, 34)
 sample_b <- sample_n(mtcars, 1:20)
 a <- list(starwars, sample_a, sample_b)
@@ -58,8 +61,12 @@ map_safe(myfiles, select, pO2)
 map_safe(myfiles, file_good, height==0)
 [1] TRUE TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
+sample_a <- sample_n(starwars, 34)
+sample_b <- sample_n(starwars, 35:87)
+sample <- list(starwars, sample_a, sample_b)
 
-
+map_lgl(sample, file_good,  height == 172)
+[1]  TRUE FALSE FALSE
 ```
 ## Getting Help
 This is a very brief explanation of the msafer package, for more instruction please visit the vignette for this package (in progress). 

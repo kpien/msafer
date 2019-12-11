@@ -57,11 +57,19 @@ map_safe <- function(.x, f, ...) {
 ```
 
 ```{r}
-sample_a <- sample_n(starwars, 34)
-sample_b <- sample_n(mtcars, 1:20)
-a <- list(starwars, sample_a, sample_b)
+file_good(starwars, height == 172)
 ```
 
+
+```{r}
+sample_a <- sample_n(starwars, 34)
+sample_b <- sample_n(starwars, 35:87)
+sample <- list(starwars, sample_a, sample_b)
+```
+
+```{r}
+map_lgl(sample, file_good,  height == 172)
+```
 
 ```{r}
 map_safe(a, select, height)
@@ -76,7 +84,19 @@ myfiles = lapply(file_list,read_csv)
 ```
 
 ```{r}
-map(myfiles, file_good, height)
+file_good <- function(.data, ...){
+  # Using `dplyr::filter()` to get the rows that matches the user's need and store them into row.
+  row <- .data %>%
+    filter(...)%>%
+    # Count the number of rows that matches the user's need.
+    nrow()
+  # Return TRUE if the rows that matches the need is greater than 0, else return FALSE
+  isTRUE(row > 0)
+}
+```
+
+```{r}
+map(starwars, file_good, height == 172)
 ```
 
 ```{r}
@@ -94,18 +114,8 @@ View(starwars)
 
 ```{r, error=FALSE}
 map_safe(starwars$name, log)
-````
-
-
-```{r}
-file_good <- function(.data, ...){
-  # Using `dplyr::filter()` to get the rows that matches the user's need and store them into row.
-  row <- .data %>%
-    filter(...)%>%
-    # Count the number of rows that matches the user's need.
-    nrow()
-  # Return TRUE if the rows that matches the need is greater than 0, else return FALSE
-  isTRUE(row > 0)
-}
 ```
+
+
+
 
