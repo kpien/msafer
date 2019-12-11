@@ -40,9 +40,14 @@ map_safe(starwars$names, log)
 [67] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [78] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
-# a list of dataframes, with myfiles[[1]], myfiles[[2]], myfiles[[4]] being empty dataframes
+# a list of 11 dataframes, with myfiles[[1]], myfiles[[2]], myfiles[[4]] being empty dataframes
 map_safe(myfiles, select, pO2)
 [1] FALSE FALSE TRUE FALSE TRUE  TRUE  TRUE  TRUE   TRUE  TRUE  TRUE
+
+map_safe(myfiles, file_good, height==0)
+[1] TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+
+
 ```
 ## Getting Help
 This is a very brief explanation of the msafer package, for more instruction please visit the vignette for this package (in progress). 
