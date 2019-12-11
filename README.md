@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/kpien/msafer.svg?branch=master)](https://travis-ci.com/kpien/msafer)
+
 # msafer
 By Lily Jin, Carol Liu, Kelly Pien
 
