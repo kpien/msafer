@@ -14,7 +14,7 @@ devtools::install_github("kpien/msafer")
 
 ## Usage
 
-`map_safe()` helps to distinguish where the error occurs when we are running the function `map()`, thus it takes in all the arguments that `map()` takes in, split the vector recursively until it find the error line, and returns false right where the error occurs. 
+`map_safe()` helps to distinguish where the error occurs when we are running the function `map()`, thus it takes in all the arguments that `map()` takes in, split the vector recursively until it find the error line, and returns `FALSE` right where the error occurs. 
 
 ## Example
 
