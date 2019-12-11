@@ -44,8 +44,11 @@ map_safe(starwars$names, log)
 map_safe(myfiles, select, pO2)
 [1] FALSE FALSE TRUE FALSE TRUE  TRUE  TRUE  TRUE   TRUE  TRUE  TRUE
 
+# the same list of dataframes, but I took off pO2 from the 8th dataframe
+[1] FALSE FALSE TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
+
 map_safe(myfiles, file_good, height==0)
-[1] TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[1] TRUE TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
 
 ```
