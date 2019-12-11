@@ -1,7 +1,7 @@
 # msafer
 By Lily Jin, Carol Liu, Kelly Pien
 
-msafer is a package designed to help user free themselves from manually check the location of error when using the function `Map()`. When using `map()` and something went wrongt, it only returns the error, but where the error occurs is not given. msafer takes in vector, function and requirements, and spit out `TURE` or `FALSE` based on whether an error occurs when running the function over the vector. msafer will return a list of logical returns where it will be easy to identify the place of the error. 
+msafer is a package that frees users from having to manually find the location of an error when using the function `map()`. When there’s something wrong with `map()`, the function only returns the error, but where this error occurs is not provided. The function `msafer()` takes in a vector, function and requirements, and spits out `TRUE` or `FALSE` based on whether an error occurs when running the function over the vector. `msafer()` will return a list of logical returns where it will be easy to identify the place of the error. 
 
 ## Installation
 
@@ -14,7 +14,7 @@ devtools::install_github("kpien/msafer")
 
 ## Usage
 
-`map_safe()` helps to distinguish where the error occurs when we are running the function `map()`, thus it takes in all the arguments that `map()` takes in, split the vector recursively until it find the error line, and returns false right where the error occurs. 
+When running the function `map()`, `map_safe()` helps determine where the error occurs. It takes in the same arguments as `map()`, splits the vector recursively until it finds the error line, and returns false right where the error occurs. 
 
 ## Example
 
@@ -40,9 +40,4 @@ map_safe(starwars$names, log)
 [78] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ```
 ## Getting Help
-This is a very brief explanation of the msafer package, for more instruction please visit the Vignette for this package. 
-
-
-
-
-
+This is a very brief explanation of the msafer package, for more instruction please visit the vignette for this package (in progress). 
