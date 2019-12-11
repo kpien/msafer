@@ -6,7 +6,7 @@ status](https://www.r-pkg.org/badges/version/msafer)](https://CRAN.R-project.org
 
 # msafer
 
-msafer is a package that frees users from having to manually find the location of an error when using the function `map()`. When there’s something wrong with `map()`, the function only returns the error, but where this error occurs is not provided. The function `msafer()` takes in a vector, function and requirements, and spits out `TRUE` or `FALSE` based on whether an error occurs when running the function over the vector. `msafer()` will return a list of logical returns where it will be easy to identify the place of the error. 
+**msafer** is a package that frees users from having to manually find the location of an error when using the function `map()`. When there’s something wrong with `map()`, the function only returns the error, but where this error occurs is not provided. The function `map_safe()` takes in a vector, function and requirements, and spits out `TRUE` or `FALSE` based on whether an error occurs when running the function over the vector. `map_safe()` will return a list of logical returns where it will be easy to identify the place of the error. 
 
 ## Installation
 
