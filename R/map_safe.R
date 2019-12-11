@@ -40,18 +40,4 @@ map_safe <- function(.x, f, ...) {
     return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
   }
 }
-# identified whether the user’s requirement existed within the dataset.
-# if yes, then the function will return true, if not, it returns false.
-#' @param .data: a dataframe
-#' @param ...: anything that filter takes in.
-#' @return A logical vector
-#' @example file_good(starwars, height == 172)
-file_good <- function(.data, ...){
-  # Using `dplyr::filter()` to get the rows that matches the user's need and store them into row.
-  row <- .data %>%
-    filter(...)%>%
-    # Count the number of rows that matches the user's need.
-    nrow()
-  # Return TRUE if the rows that matches the need is greater than 0, else return FALSE
-  isTRUE(row > 0)
-}
+
