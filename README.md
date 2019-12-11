@@ -16,7 +16,7 @@ devtools::install_github("kpien/msafer")
 
 ## Usage
 
-When running the function `map()`, `map_safe()` helps determine where the error occurs. It takes in the same arguments as `map()`, splits the vector recursively until it finds the error line, and returns `FALSE` right where the error occurs. 
+When running the function `map()`, `map_safe()` helps determine where the error occurs. It takes in the same arguments as `map()`, splits the vector recursively until it finds the error line, and returns `FALSE` right where the error occurs. `file_good()` identified whether the user’s requirement existed within the dataset/list of dataframes, if yes, then the function will return `TRUE`, if not, it returns `FALSE`.
 
 
 ## Example
