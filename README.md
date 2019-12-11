@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/kpien/msafer.svg?branch=master)](https://travis-ci.com/kpien/msafer)
 
 # msafer
-By Lily Jin, Carol Liu, Kelly Pien
+By [Lily Jin](https://github.com/Lilyyyy54), [Carol Liu](https://github.com/CarolLiuSifan), and [Kelly Pien](https://github.com/kpien)
 
 msafer is a package that frees users from having to manually find the location of an error when using the function `map()`. When there’s something wrong with `map()`, the function only returns the error, but where this error occurs is not provided. The function `msafer()` takes in a vector, function and requirements, and spits out `TRUE` or `FALSE` based on whether an error occurs when running the function over the vector. `msafer()` will return a list of logical returns where it will be easy to identify the place of the error. 
 
