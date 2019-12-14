@@ -2,7 +2,7 @@
 #' Determine if you can apply a function to a vector without errors.
 #' @param .x Vector of paths to csvs
 #' @param f Function that's being applied to the dataset
-#' @param ... Arguments
+#' @param ... Arguments passed to \code{\link{map}}
 #' @return A logical vector
 #' @example map_safe(iris$Sepal.Length, log)
 
@@ -39,5 +39,21 @@ map_safe <- function(.x, f, ...) {
     b <- .x[2:length(.x)] # the remaining elements went through the recursion again
     return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
   }
+}
+
+#' identified whether the user’s requirement existed within the dataset.
+#' if yes, then the function will return true, if not, it returns false.
+#' @param .data a dataframe
+#' @param ... Arguments passed to \code{\link{map}}
+#' @return A logical vector
+#' @example check_match(starwars, height == 172)
+check_match <- function(.data, ...){
+  # Using `dplyr::filter()` to get the rows that matches the user's need and store them into row.
+  row <- .data %>%
+    dplyr::filter(...)%>%
+    # Count the number of rows that matches the user's need.
+    nrow()
+  # Return TRUE if the rows that matches the need is greater than 0, else return FALSE
+  isTRUE(row > 0)
 }
 

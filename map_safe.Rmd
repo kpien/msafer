@@ -55,7 +55,6 @@ map_safe_bubble <- function(.x, f, ...) {
 }
 ```
 
-
 ```{r}
 # another function: if map_safe returns all TRUE, else different behaviors: only return good results
 #' Determine if you can apply a function to a vector without errors.
@@ -64,6 +63,7 @@ map_safe_bubble <- function(.x, f, ...) {
 #' @param ... Arguments
 #' @return A logical vector
 #' @example map_safe(iris$Sepal.Length, log)
+
 map_safe_merge <- function(.x, f, ...) {
   #.x: vector of paths to csvs
   #f: function that's being applied to the dataset
@@ -99,6 +99,7 @@ map_safe_merge <- function(.x, f, ...) {
     return(c(map_safe_merge(a, f, ...), map_safe_merge(b, f, ...)))
   }
 }
+
 ```
 
 ```{r}
@@ -124,7 +125,21 @@ map_safe_bubble(a, select,height)
 map_safe_merge(a, select,height)
 ```
 
+```{r}
+sample_a <- sample_n(starwars, 34)
+sample_b <- sample_n(mtcars, 1:20)
+a <- list(starwars, sample_a, sample_b)
+map_safe_bubble(a, select, height)
+map_safe_merge(a, select, height)
+```
 
+```{r}
+setwd("~/Downloads")
+mydir = "myfiles"
+file_list = list.files(path=mydir, pattern="*.csv", full.names=TRUE)
+file_list
+myfiles = lapply(file_list,read_csv)
+```
 
 ```{r}
 library(readxl)
@@ -159,3 +174,4 @@ map_safe_bubble(myfiles, select, pO2)
 map_safe_merge(myfiles, select, pO2)
 map_safe_bubble(myfiles, check_match, height==0)
 map_safe_merge(myfiles, check_match, height==0)
+```
