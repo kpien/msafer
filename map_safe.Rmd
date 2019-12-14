@@ -19,8 +19,7 @@ library(readr)
 #always returns logical vector
 #another function
 #if map_safe returns all TRUE, else different behaviors: only return good results
-
-map_safe <- function(.x, f, ...) {
+map_safe_bubble <- function(.x, f, ...) {
   # .x: vector of paths to csvs
   # f: function that's being applied to the dataset
   # ... arguments
@@ -51,40 +50,61 @@ map_safe <- function(.x, f, ...) {
     # else, split in halves and run map_safe on each half
     a <- .x[1] # Take the first element in the vector
     b <- .x[2:length(.x)] # the remaining elements went through the recursion again
-    return(c(map_safe(a, f, ...), map_safe(b, f, ...)))
+    return(c(map_safe_bubble(a, f, ...), map_safe_bubble(b, f, ...)))
   }
 }
 ```
 
+
 ```{r}
-file_good(starwars, height == 172)
+# another function: if map_safe returns all TRUE, else different behaviors: only return good results
+#' Determine if you can apply a function to a vector without errors.
+#' @param .x Vector of paths to csvs
+#' @param f Function that's being applied to the dataset
+#' @param ... Arguments
+#' @return A logical vector
+#' @example map_safe(iris$Sepal.Length, log)
+
+map_safe_merge <- function(.x, f, ...) {
+  #.x: vector of paths to csvs
+  #f: function that's being applied to the dataset
+  #... arguments
+  if (length(.x) == 1) {
+    #if there is one row in .x: get and return the row number
+    
+    a <- tryCatch(
+      {
+        #This is the try part
+        purrr::map(.x, f, ...)
+        
+        TRUE
+      },
+      error = function(e) {
+        message("Something went wrong")
+        message("Here's the original error message")
+        message(e)
+        return(FALSE)
+      },
+      warning=function(w) {
+        message("Here's the original warning message:")
+        message(w)
+        # Choose a return value in case of warning
+        return(TRUE)
+      }
+    )
+    return(a)
+  }
+  else {
+    a <- .x[1:floor(length(.x)/2)] #first half of .x
+    b <- .x[(floor(length(.x)/2)+1):length(.x)] #second half of .x
+    return(c(map_safe_merge(a, f, ...), map_safe_merge(b, f, ...)))
+  }
+}
+
 ```
 
-
 ```{r}
-sample_a <- sample_n(starwars, 34)
-sample_b <- sample_n(starwars, 35:87)
-sample <- list(starwars, sample_a, sample_b)
-```
-
-```{r}
-map_lgl(sample, file_good,  height == 172)
-```
-
-```{r}
-map_safe(a, select, height)
-```
-
-```{r}
-setwd("~/Desktop")
-mydir = "file_for_carol"
-file_list = list.files(path=mydir, pattern="*.csv", full.names=TRUE)
-file_list
-myfiles = lapply(file_list,read_csv)
-```
-
-```{r}
-file_good <- function(.data, ...){
+check_match <- function(.data, ...){
   # Using `dplyr::filter()` to get the rows that matches the user's need and store them into row.
   row <- .data %>%
     filter(...)%>%
@@ -96,26 +116,50 @@ file_good <- function(.data, ...){
 ```
 
 ```{r}
-map(starwars, file_good, height == 172)
+sample_a <- sample_n(starwars, 34)
+sample_b <- sample_n(mtcars, 1:20)
+a <- list(starwars, sample_a, sample_b)
 ```
 
 ```{r}
-map(myfiles, select, pO2)
-```
-
-```{r, warning=FALSE}
-map_safe(myfiles, select, pO2)
-```
-
-```{r, warning=FALSE}
-map_safe(starwars$height, log)
-```
-View(starwars)
-
-```{r, error=FALSE}
-map_safe(starwars$name, log)
+map_safe_bubble(a, select,height)
+map_safe_merge(a, select,height)
 ```
 
 
 
+```{r}
+library(readxl)
+my_data <- read_excel("SDS390 test1.xlsx")
+```
+
+```{r}
+map_safe_bubble(my_data, log)
+map_safe_merge(my_data, log)
+map_safe_bubble(starwars, length)
+map_safe_merge(starwars, length)
+```
+
+```{r}
+sample_a <- sample_n(starwars, 34)
+sample_b <- sample_n(mtcars, 1:20)
+a <- list(starwars, sample_a, sample_b)
+map_safe_bubble(a, select, height)
+map_safe_merge(a, select, height)
+```
+
+```{r}
+setwd("~/Downloads")
+mydir = "myfiles"
+file_list = list.files(path=mydir, pattern="*.csv", full.names=TRUE)
+file_list
+myfiles = lapply(file_list,read_csv)
+```
+
+```{r}
+map_safe_bubble(myfiles, select, pO2)
+map_safe_merge(myfiles, select, pO2)
+map_safe_bubble(myfiles, check_match, height==0)
+map_safe_merge(myfiles, check_match, height==0)
+```
 
