@@ -2,20 +2,25 @@
 % Please edit documentation in R/map_safe.R
 \name{map_safe}
 \alias{map_safe}
-\title{Determine if you can apply a function to a vector without errors.}
+\title{Return a tibble that contains the message generated from map_safe_merge}
 \usage{
 map_safe(.x, f, ...)
 }
 \arguments{
-\item{.x}{Vector of paths to csvs}
+\item{.x}{a vector}
 
 \item{f}{Function that's being applied to the dataset}
 
-\item{...}{Arguments passed to \code{\link{map}}}
+\item{...}{Arguments passed to \code{\link{map_safe_merge}}}
 }
 \value{
-A logical vector
+A tibble
 }
 \description{
-Determine if you can apply a function to a vector without errors.
+Return a tibble that contains the message generated from map_safe_merge
+}
+\examples{
+if (require(dplyr)){
+map_safe(list(starwars, sample_n(mtcars, 1:20), sample_n(mtcars, 1:20)), select, height)
+}
 }

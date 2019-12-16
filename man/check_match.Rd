@@ -9,11 +9,16 @@ check_match(.data, ...)
 \arguments{
 \item{.data}{a dataframe}
 
-\item{...}{Arguments passed to \code{\link{filter}}}
+\item{...}{Arguments passed to \code{\link[dplyr]{filter}}}
 }
 \value{
 A logical vector
 }
 \description{
 identified whether the user’s requirement existed within the dataset.
+}
+\examples{
+if (require(dplyr)){
+check_match(starwars, height == 172)
+}
 }

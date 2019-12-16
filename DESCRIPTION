@@ -15,5 +15,10 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     purrr,
-    dplyr
-RoxygenNote: 7.0.0
+    dplyr,
+    tibble
+RoxygenNote: 7.0.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
