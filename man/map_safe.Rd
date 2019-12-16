@@ -11,7 +11,7 @@ map_safe(.x, f, ...)
 
 \item{f}{Function that's being applied to the dataset}
 
-\item{...}{Arguments}
+\item{...}{Arguments passed to \code{\link{map}}}
 }
 \value{
 A logical vector

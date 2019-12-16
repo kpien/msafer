@@ -4,7 +4,7 @@
 #' @param f Function that's being applied to the dataset
 #' @param ... Arguments passed to \code{\link{map}}
 #' @return A logical vector
-#' @example map_safe(iris$Sepal.Length, log)
+#' @example map_safe(starwars$height, log)
 
 map_safe <- function(.x, f, ...) {
   #.x: vector of paths to csvs
@@ -42,9 +42,8 @@ map_safe <- function(.x, f, ...) {
 }
 
 #' identified whether the user’s requirement existed within the dataset.
-#' if yes, then the function will return true, if not, it returns false.
 #' @param .data a dataframe
-#' @param ... Arguments passed to \code{\link{map}}
+#' @param ... Arguments passed to \code{\link{filter}}
 #' @return A logical vector
 #' @example check_match(starwars, height == 172)
 check_match <- function(.data, ...){

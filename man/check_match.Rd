@@ -2,20 +2,18 @@
 % Please edit documentation in R/map_safe.R
 \name{check_match}
 \alias{check_match}
-\title{identified whether the user’s requirement existed within the dataset.
-if yes, then the function will return true, if not, it returns false.}
+\title{identified whether the user’s requirement existed within the dataset.}
 \usage{
 check_match(.data, ...)
 }
 \arguments{
 \item{.data}{a dataframe}
 
-\item{...}{Arguments}
+\item{...}{Arguments passed to \code{\link{filter}}}
 }
 \value{
 A logical vector
 }
 \description{
 identified whether the user’s requirement existed within the dataset.
-if yes, then the function will return true, if not, it returns false.
 }
