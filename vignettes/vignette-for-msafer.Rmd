@@ -1,0 +1,39 @@
+---
+title: "vignette-for-msafer"
+author: "Sifan(Carol) Liu, Kelly Pien, Huiqing(Lily) Jin"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vignette-for-msafer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(msafer)
+```
+
+```{r}
+#sample_a <- sample_n(starwars, 34)
+#sample_b <- sample_n(mtcars, 1:20)
+#a <- list(starwars, sample_a, sample_b)
+#map_safe_bubble(a, select, height)
+#map_safe_merge(a, select, height)
+```
+
+```{r}
+# setwd("~/Downloads")
+# mydir = "myfiles"
+# file_list = list.files(path=mydir, pattern="*.csv", full.names=TRUE)
+# file_list
+# myfiles = lapply(file_list,read_csv)
+# map_safe_merge(myfiles, select, pO2)
+# map_safe_merge(myfiles, check_match, height==0)
+```
+
