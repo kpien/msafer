@@ -22,13 +22,10 @@ map_safe_merge <- function(.x, f, ...) {
         tibble(result=TRUE, error_message= "NA")
       },
       error = function(e) {
-        message("Something went wrong")
-        message("Here's the original error message")
         e <- as.character(e)
         return(tibble(result=FALSE, error_message= e))
       },
       warning=function(w) {
-        message("Here's the original warning message:")
         # Choose a return value in case of warning
         w <- as.character(w)
         return(tibble(result=TRUE, error_message= w))
