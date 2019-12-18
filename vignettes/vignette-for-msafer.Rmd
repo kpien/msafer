@@ -45,6 +45,17 @@ Uh oh! Something didn't work - but what exactly?
 map_safe_merge(a, dplyr::select, height)
 ```
 
+You can also pass in just one dataframe. `map_safe_merge()` will return whether or not the specified function can be applied to each column in the dataframe.
+
+```{r}
+map_safe_merge(iris, log)
+```
+
+If you pass in one vector, `map_safe_merge()` will return whether or not the specified function can be applied to each row.
+```{r}
+map_safe_merge(iris$Sepal.Length, log)
+```
+
 # Conclusion
 The flagship function of *msafer*, `map_safe_merge()`, can identify on which files errors occur when applying `map()` to a list of dataframes.
 
@@ -57,4 +68,3 @@ The flagship function of *msafer*, `map_safe_merge()`, can identify on which fil
 # map_safe_merge(myfiles, select, pO2)
 # map_safe_merge(myfiles, check_match, height==0)
 ```
-
