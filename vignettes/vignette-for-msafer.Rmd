@@ -1,9 +1,9 @@
 ---
-title: "vignette-for-msafer"
+title: "Msafer Vignette"
 author: "Sifan(Carol) Liu, Kelly Pien, Huiqing(Lily) Jin"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vignette-for-msafer}
+  %\VignetteIndexEntry{msafer-vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,17 +15,38 @@ knitr::opts_chunk$set(
 )
 ```
 
+How to use *msafer* to locate errors when applying `map()` to a list of dataframes.
+
 ```{r setup}
 library(msafer)
 ```
 
+## Locating Errors with map_safe_merge()
+
+For demonstration purposes, let's create a sample list of dataframes from the `starwars` and `mtcars` datasets.
+
 ```{r}
-#sample_a <- sample_n(starwars, 34)
-#sample_b <- sample_n(mtcars, 1:20)
-#a <- list(starwars, sample_a, sample_b)
-#map_safe_bubble(a, select, height)
-#map_safe_merge(a, select, height)
+sample_a <- dplyr::sample_n(dplyr::starwars, 34)
+sample_b <- dplyr::sample_n(mtcars, 1:20)
+a <- list(dplyr::starwars, sample_a, sample_b)
 ```
+
+Let's attempt to use `map()` to use a function on all the dataframes in this list.
+
+```{r, error=TRUE}
+purrr::map(a, dplyr::select, height)
+```
+
+Uh oh! Something didn't work - but what exactly?
+
+`map_safe_merge()` to the rescue! Pass `map_safe_merge()` the same arguments as `map()`. `map_safe_merge()` will return a tibble with the file numbers and any errors that may have occurred while trying to apply `map()`, grouping repeat errors together.
+
+```{r}
+map_safe_merge(a, dplyr::select, height)
+```
+
+# Conclusion
+The flagship function of *msafer*, `map_safe_merge()`, can identify on which files errors occur when applying `map()` to a list of dataframes.
 
 ```{r}
 # setwd("~/Downloads")
