@@ -82,6 +82,6 @@ map_safe <- function(.x, f, ...) {
   # order tibble original based on error_message and result
   nest(original, which_id = id)
 }
-
+globalVariables("id")
 
 
