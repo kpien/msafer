@@ -71,6 +71,7 @@ check_match <- function(.data, ...){
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate
 #' @importFrom dplyr row_number
+#' @importFrom tidyr nest
 #' @export
 #' @examples
 #' if (require(dplyr)){

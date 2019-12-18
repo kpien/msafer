@@ -16,6 +16,7 @@ LazyData: true
 Imports:
     purrr,
     dplyr,
+    tidyr
     tibble
 RoxygenNote: 7.0.2
 Suggests: 
