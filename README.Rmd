@@ -23,7 +23,7 @@ status](https://www.r-pkg.org/badges/version/msafer)](https://CRAN.R-project.org
 [![Build Status](https://travis-ci.com/kpien/msafer.svg?branch=master)](https://travis-ci.com/kpien/msafer)
 <!-- badges: end -->
 
-**msafer** is a package that frees users from having to manually find the location of an error when using the function `map()`. When there’s something wrong with `map()`, the function only returns the error, but where this error occurs is not provided. The function `map_safe()` takes in a vector, function and requirements, and spits out `TRUE` or `FALSE` based on whether an error occurs when running the function over the vector. `map_safe()` will return a list of logical returns where it will be easy to identify the place of the error. 
+**msafer** is a package that frees users from having to manually find the location of an error when using the function `map()`. When `map()` returns an error, it's unclear where this error occurs. The function `map_safe()` takes in a vector, function and requirements, and spits out `TRUE` or `FALSE` based on whether an error occurs when running the function over the vector. `map_safe()` will return a list of logical returns where it will be easy to identify the place of the error. 
 
 ## Installation
 
@@ -35,7 +35,15 @@ devtools::install_github("kpien/msafer")
 ```
 ## Example
 
-Pass `map_safe_merge()` the same arguments as `map()`. `map_safe_merge()` will return a tibble with the file numbers and any errors that may have occurred while trying to apply `map()`, grouping repeat errors together.
+For demonstration purposes, let's create a sample list of dataframes from the `starwars` and `mtcars` datasets.
+
+```{r}
+sample_a <- dplyr::sample_n(dplyr::starwars, 34)
+sample_b <- dplyr::sample_n(mtcars, 1:20)
+a <- list(dplyr::starwars, sample_a, sample_b)
+```
+
+Pass `map_safe_merge()` the same arguments as `map()`. These would be the list of dataframes, the function to map over all the dataframes, and any arguments that the function needs. `map_safe_merge()` will return a tibble with the file numbers and any errors that may have occurred while trying to apply `map()`, grouping repeat errors together.
 
 ```{r example}
 library(msafer)
