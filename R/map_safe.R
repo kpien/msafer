@@ -82,7 +82,7 @@ map_safe <- function(.x, f, ...) {
     #generate the row index for tibble original
     mutate(id = row_number())
   # order tibble original based on error_message and result
-  with(original, original[order(error_message,result) , ])
+  nest(original, which_id = id)
 }
 
 
