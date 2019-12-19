@@ -9,6 +9,8 @@ Author: as.person(c(
   ))
 Maintainer: Kelly Pien <kpien@smith.edu>
 Description: Locate errors when applying `map()`
+    Pass in the same arguments as map (a list, function, and the function's arguments).
+    Return a tibble showing whether or not a file contains errors, grouping like errors together.
 License: CC0
 Encoding: UTF-8
 LazyData: true
