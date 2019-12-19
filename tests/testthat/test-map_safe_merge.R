@@ -13,7 +13,7 @@ test_that("checks numeric and factor vectors in dataframe,
              expect_equal(out$result, c(TRUE, TRUE, FALSE))
              expect_equal(out$error_message, c("NA",
                                                "NA",
-                                               "Error in Math.factor(x, base): ‘log’ not meaningful for factors\n"))
+                                               "Error in Math.factor(x, base): 'log' not meaningful for factors\n"))
            }
 )
 

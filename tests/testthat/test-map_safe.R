@@ -12,7 +12,7 @@ test_that("checks numeric and factor vectors in dataframe,
              out <- map_safe(check_sample_a, log)
              expect_equal(out$result, c(TRUE,FALSE))
              expect_equal(out$error_message, c("NA",
-                                               "Error in Math.factor(x, base): ‘log’ not meaningful for factors\n"))
+                                               "Error in Math.factor(x, base): 'log' not meaningful for factors\n"))
              expect_true(check_match(out[[3]][[1]], id == 2))
              expect_false(check_match(out[[3]][[2]], id == 2))
            }
