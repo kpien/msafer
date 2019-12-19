@@ -1,5 +1,4 @@
-# another function: if map_safe_merge returns all TRUE, else different behaviors: only return good results
-#' Determine if you can apply a function to a vector without errors.
+#' Identify location of errors from applying a function to a vector
 #' @param .x Vector of paths to csvs
 #' @param f Function that's being applied to the dataset
 #' @param ... Arguments passed to \code{\link{map}}
@@ -82,6 +81,6 @@ map_safe <- function(.x, f, ...) {
   # order tibble original based on error_message and result
   nest(original, which_id = id)
 }
-
+globalVariables("id")
 
 
