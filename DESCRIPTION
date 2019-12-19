@@ -8,8 +8,7 @@ Author: as.person(c(
     "Kelly Pien <kpien@smith.edu> [aut, cre]"
   ))
 Maintainer: Kelly Pien <kpien@smith.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Locate errors when applying `map()`
 License: CC0
 Encoding: UTF-8
 LazyData: true
