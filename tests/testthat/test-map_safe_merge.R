@@ -11,9 +11,8 @@ test_that("checks numeric and factor vectors in dataframe,
            & checks input with odd length", {
              out <- map_safe_merge(check_sample_a, log)
              expect_equal(out$result, c(TRUE, TRUE, FALSE))
-             expect_equal(out$error_message, c("NA",
-                                               "NA",
-                                               "Error in Math.factor(x, base): 'log' not meaningful for factors\n"))
+             expect_equal(out$error_message[[1]],out$error_message[[2]])
+             expect_false(out$error_message[[1]] == out$error_message[[3]])
            }
 )
 
@@ -21,11 +20,9 @@ test_that("checks dataframes with numeric variables,
            & checks input with even length",{
              out <- map_safe_merge(check_list_sample, range)
              expect_equal(out$result, c(FALSE,FALSE,TRUE,FALSE))
-             expect_equal(out$error_message, c("Error in FUN(X[[i]], ...): only defined on a data frame with all numeric variables\n",
-                                               "Error in FUN(X[[i]], ...): only defined on a data frame with all numeric variables\n",
-                                               "NA",
-                                               "Error in FUN(X[[i]], ...): only defined on a data frame with all numeric variables\n"))
-           }
+             expect_equal(out$error_message[[1]],out$error_message[[2]],out$error_message[[4]])
+             expect_false(out$error_message[[1]] == out$error_message[[3]])
+             }
 )
 
 check_character <- "a"
@@ -35,26 +32,23 @@ test_that("checks input with length == 1 (character and double)", {
   out_double <- map_safe_merge(check_double, log)
   expect_equal(out_character$result, FALSE)
   expect_equal(out_double$result, TRUE)
-  expect_equal(out_character$error_message, "Error in .Primitive(\"log\")(x, base): non-numeric argument to mathematical function\n")
-  expect_equal(out_double$error_message, "NA")
+  expect_false(out_character$error_message == out_double$error_message)
 }
 )
 
 test_that("checks different error message generating,
            & checks warning output",{
              out <- map_safe_merge(check_list_sample,sapply,time_zone)
-             expect_equal(out$result, c(FALSE,TRUE,TRUE,TRUE))
-             expect_equal(out$error_message, c("Error in match.fun(FUN): object 'time_zone' not found\n",
-                                               "simpleWarning in match.fun(FUN): restarting interrupted promise evaluation\n",
-                                               "simpleWarning in match.fun(FUN): restarting interrupted promise evaluation\n",
-                                               "simpleWarning in match.fun(FUN): restarting interrupted promise evaluation\n"))
-
+             expect_equal(out[[1]][[2]],TRUE)
+             expect_false(out[[2]][[2]] == "NA")
+             expect_equal(out$error_message[[3]],out$error_message[[4]])
+             expect_false(out$error_message[[1]] == out$error_message[[2]])
              }
           )
 
 test_that("checks error message for incorrect input type", {
   out <- map_safe_merge(log,mtcars)
   expect_equal(out$result, FALSE)
-  expect_equal(out$error_message, "Error: Can't convert a `data.frame` object to function\n")
+  expect_false(out$error_message == "NA")
 }
 )
