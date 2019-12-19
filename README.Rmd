@@ -60,6 +60,17 @@ sample_df <- map_safe(list_sample, dplyr::select, height)
 sample_df
 ```
 
+`check_match()` identified whether the user’s requirement existed within the dataset/list of dataframes, if yes, then the function will return TRUE, if not, it returns FALSE.
+```{r}
+check_match(starwars, height == 172)
+```
+
+`check_match()` and also be used under `map_safe()` when applying check_match() to a vector which could contain multiple elements  
+```{r}
+d <- map_safe(list_sample, check_match,  height == 172)
+d
+```
+
 
 ## Developed By
 Sifan(Carol) Liu, Kelly Pien, Huiqing(Lily) Jin
