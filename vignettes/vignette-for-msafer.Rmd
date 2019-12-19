@@ -21,7 +21,7 @@ Using *msafer* to locate errors when applying `map()` to a list of dataframes.
 library(msafer)
 ```
 
-## Locating Errors with map_safe_merge()
+## Locating Errors with map_safe_merge() & map_safe()
 
 For demonstration purposes, let's create a sample list of dataframes from the `starwars` and `mtcars` datasets.
 
@@ -70,16 +70,37 @@ map_safe_merge(iris, log)
 ```
 
 If you pass in one vector, `map_safe_merge()` will return whether or not the specified function can be applied to each row.
+
+```{r}
+map_safe(iris, log)
+```
+
 ```{r}
 map_safe_merge(iris$Sepal.Length, log)
 ```
 
+```{r}
+map_safe(iris$Sepal.Length, log)
+```
+
+`map_safe()` and `map_safe_merge()` can be used based on user's preference and how they want to use the output. 
+
+Another function within the msafer package is the `check_match()` function which identified whether the user’s requirement existed within the dataset, if yes, then the function will return true, if not, it returns false.
+
+```{r}
+# when working with one dataframe
+check_match(starwars, hair_color == "brown")
+```
+We can see that as starwars does contain brown hair color, thus the function returns true. 
+
 ## map_safe_merge() x check_match()
 You can also use `map_safe_merge()` in conjunction with `check_match()`.
 ```{r}
-map_safe_merge(dplyr::starwars, check_match, height==0)
+s <- map_safe(dplyr::starwars, check_match, height==0)
+s
 ```
 
 
+
 # Conclusion
-The flagship function of *msafer*, `map_safe_merge()`, can identify on which files errors occur when applying `map()` to a list of dataframes.
+The flagship function of *msafer*, `map_safe()`, can identify on which files errors occur when applying `map()` to a list of dataframes.

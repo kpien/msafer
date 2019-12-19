@@ -2,7 +2,7 @@
 % Please edit documentation in R/map_safe.R
 \name{map_safe_merge}
 \alias{map_safe_merge}
-\title{Determine if you can apply a function to a vector without errors.}
+\title{Identify location of errors from applying a function to a vector}
 \usage{
 map_safe_merge(.x, f, ...)
 }
@@ -17,7 +17,7 @@ map_safe_merge(.x, f, ...)
 A logical vector
 }
 \description{
-Determine if you can apply a function to a vector without errors.
+Identify location of errors from applying a function to a vector
 }
 \examples{
 if (require(dplyr)){
