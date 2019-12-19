@@ -38,13 +38,13 @@ devtools::install_github("kpien/msafer")
 For demonstration purposes, let's create a sample list of dataframes from the `starwars` and `mtcars` datasets.
 
 ```{r}
-sample_a <- sample_n(starwars, 34)
+sample_a <- dplyr::sample_n(dplyr::starwars, 34)
 sample_a <- subset(sample_a, select = -c(height,hair_color))
-sample_b <- sample_n(starwars, 35)
-sample_c <- sample_n(mtcars, 20)
+sample_b <- dplyr::sample_n(dplyr::starwars, 35)
+sample_c <- dplyr::sample_n(mtcars, 20)
 sample_c <- subset(sample_c, select = -c(hp))
-sample_d <- tibble()
-list_sample <- list(starwars, sample_a, sample_b, sample_c, mtcars, sample_d)
+sample_d <- tibble::tibble()
+list_sample <- list(dplyr::starwars, sample_a, sample_b, sample_c, mtcars, sample_d)
 ```
 
 Pass `map_safe_merge()` the same arguments as `map()`. These would be the list of dataframes, the function to map over all the dataframes, and any arguments that the function needs. `map_safe_merge()` will return a tibble with the file numbers and any errors that may have occurred while trying to apply `map()`, grouping repeat errors together.
@@ -62,7 +62,7 @@ sample_df
 
 `check_match()` identified whether the user’s requirement existed within the dataset/list of dataframes, if yes, then the function will return TRUE, if not, it returns FALSE.
 ```{r}
-check_match(starwars, height == 172)
+check_match(dplyr::starwars, height == 172)
 ```
 
 `check_match()` and also be used under `map_safe()` when applying check_match() to a vector which could contain multiple elements  
@@ -73,4 +73,7 @@ d
 
 
 ## Developed By
-Sifan(Carol) Liu, Kelly Pien, Huiqing(Lily) Jin
+
+- [Sifan(Carol) Liu](https://github.com/CarolLiuSifan)
+- [Kelly Pien](https://github.com/kpien)
+- [Huiqing(Lily) Jin](https://github.com/Lilyyyy54)
