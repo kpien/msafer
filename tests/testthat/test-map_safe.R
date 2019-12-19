@@ -43,7 +43,7 @@ test_that("checks different error message generating,
            & checks warning output", {
              out <- map_safe(check_list_sample,sapply,time_zone)
              expect_equal(out$result[[2]],TRUE)
-             expect_false(out$error_message[[2]],"NA")
+             expect_false(out$error_message[[2]]=="NA")
              expect_true(check_match(out[[3]][[1]], id == 1))
              expect_false(check_match(out[[3]][[2]], id == 4))
            }
