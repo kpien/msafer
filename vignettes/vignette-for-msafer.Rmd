@@ -26,12 +26,12 @@ library(msafer)
 For demonstration purposes, let's create a sample list of dataframes from the `starwars` and `mtcars` datasets.
 
 ```{r}
-sample_a <- sample_n(starwars, 34)
+sample_a <- dplyr::sample_n(dplyr::starwars, 34)
 sample_a <- subset(sample_a, select = -c(height,hair_color))
-sample_b <- sample_n(starwars, 35)
-sample_c <- sample_n(mtcars, 20)
+sample_b <- dplyr::sample_n(dplyr::starwars, 35)
+sample_c <- dplyr::sample_n(mtcars, 20)
 sample_c <- subset(sample_c, select = -c(hp))
-sample_list <- list(starwars, sample_a, sample_b, sample_c, mtcars)
+sample_list <- list(dplyr::starwars, sample_a, sample_b, sample_c, mtcars)
 ```
 
 Let's attempt to use `map()` to use a function on all the dataframes in this list.
@@ -89,7 +89,7 @@ Another function within the msafer package is the `check_match()` function which
 
 ```{r}
 # when working with one dataframe
-check_match(starwars, hair_color == "brown")
+check_match(dplyr::starwars, hair_color == "brown")
 ```
 We can see that as starwars does contain brown hair color, thus the function returns true. 
 
