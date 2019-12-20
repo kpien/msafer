@@ -29,7 +29,7 @@ status](https://www.r-pkg.org/badges/version/msafer)](https://CRAN.R-project.org
 
 You can install the development version of msafer from [GitHub](https://github.com/) with:
 
-``` {r}
+``` {r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("kpien/msafer")
 ```
@@ -37,35 +37,40 @@ devtools::install_github("kpien/msafer")
 
 For demonstration purposes, let's create a sample list of dataframes from the `starwars` and `mtcars` datasets.
 
-```{r}
-sample_a <- dplyr::sample_n(dplyr::starwars, 34)
-sample_a <- subset(sample_a, select = -c(height,hair_color))
-sample_b <- dplyr::sample_n(dplyr::starwars, 35)
-sample_c <- dplyr::sample_n(mtcars, 20)
-sample_c <- subset(sample_c, select = -c(hp))
+```{r, message=FALSE}
+library(dplyr)
+sample_a <- starwars %>%
+  sample_n(34) %>%
+  select(-height, -hair_color)
+sample_b <- sample_n(starwars, 35)
+sample_c <- mtcars %>%
+  sample_n(20) %>%
+  select(-hp)
 sample_d <- tibble::tibble()
-list_sample <- list(dplyr::starwars, sample_a, sample_b, sample_c, mtcars, sample_d)
+list_sample <- list(starwars, sample_a, sample_b, sample_c, mtcars, sample_d)
 ```
 
 Pass `map_safe_merge()` the same arguments as `map()`. These would be the list of dataframes, the function to map over all the dataframes, and any arguments that the function needs. `map_safe_merge()` will return a tibble with the file numbers and any errors that may have occurred while trying to apply `map()`, grouping repeat errors together.
 
 ```{r example}
 library(msafer)
-map_safe_merge(list_sample, dplyr::select, height)
+map_safe_merge(list_sample, select, height)
 ```
 
 However, if the vector is huge, then the result would be messy and hard to grab information from the tibble. Thus, we can use `map_safe()` which nests the error message, and returns a tibble that contains only the unique error message and the index locating where the error occurs within the vector.
 ```{r}
 sample_df <- map_safe(list_sample, dplyr::select, height)
 sample_df
+sample_df %>% 
+  tidyr::unnest(which_id)
 ```
 
-`check_match()` identified whether the user’s requirement existed within the dataset/list of dataframes, if yes, then the function will return TRUE, if not, it returns FALSE.
+`check_match()` identified whether the user’s requirement existed within the dataset/list of dataframes, if yes, then the function will return `TRUE`, if not, it returns `FALSE`.
 ```{r}
 check_match(dplyr::starwars, height == 172)
 ```
 
-`check_match()` and also be used under `map_safe()` when applying check_match() to a vector which could contain multiple elements  
+`check_match()` and also be used under `map_safe()` when applying `check_match()` to a vector which could contain multiple elements  
 ```{r}
 d <- map_safe(list_sample, check_match,  height == 172)
 d
